@@ -11,12 +11,70 @@
     <!-- Style -->
     <link rel="stylesheet" href="assets/css/style.css">
 
+    <!-- JQuery -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
     <!-- JavaScript-->
     <script src="assets/javascript/game.js"></script>
     
     <title>Document</title>
 </head>
 <body>
+
+    <div class="wrapper">
+        <!-- Title -->
+        <div class="title-container item">
+            <h1>Dog RPG</h1>
+        </div>
+
+        <!-- Character Selection Container -->
+        <div class="char-select-container item">
+
+            <div class="char-select-title">
+                <h2>Choose your fighter!</h2>
+            </div>
+
+            <div class="char-select-area">
+                <div class="char">
+                    <span><img id="pom" src="assets/images/pom-1.png" alt="Pomeranian"></span>
+                </div>
+
+                <div class="char">
+                    <span><img id="lab" src="assets/images/lab-1.png" alt="Labrador"></span>
+                </div>
+
+                <div class="char">
+                    <span><img id="boxer" src="assets/images/boxer-1.png" alt="Boxer"></span>
+                </div>
+
+                <div class="char">
+                    <span><img id="shiba" src="assets/images/shiba-1.png" alt="Shiba Inu"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Fight Area -->
+        <div class="stage-container item">
+            <div class="player">
+
+                <button onclick="attack()">Attack</button>
+            </div>
+
+            <div class="opponent">
+
+            </div>
+        </div>
+
+        <!-- Message Area -->
+        <div class="msg-container item">
+            <div class="message-area">
+
+            </div>
+            
+            <button onclick="restart()">Restart</button>
+        </div>
+    </div>
     
 </body>
 </html>

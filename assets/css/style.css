@@ -1,0 +1,37 @@
+* {
+    box-sizing: border-box;
+}
+
+h1 {
+    font-size: 4em;
+}
+.wrapper {
+    width: 70%;
+    margin: 0 auto;
+    border: 1px solid red;
+    text-align: center;
+}
+
+.item {
+    border: 1px dotted blue;
+}
+
+.title-container {
+    text-align: center;
+}
+
+/* Character Select Area */
+.char-select-area {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 2rem;
+}
+
+.char {
+    background: green;
+}
+
+.char img {
+    max-width:100%;
+    max-height:100%;
+}
