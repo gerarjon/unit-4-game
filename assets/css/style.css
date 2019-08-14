@@ -5,8 +5,21 @@
 h1 {
     font-size: 4em;
 }
+
+h2 {
+    font-size: 2em;
+}
+
+h4 {
+    font-size: 1.2em;
+}
+
+button {
+    font-size: 1em;
+}
+
 .wrapper {
-    width: 70%;
+    width: 80%;
     margin: 0 auto;
     border: 1px solid red;
     text-align: center;
@@ -14,6 +27,8 @@ h1 {
 
 .item {
     border: 1px dotted blue;
+    margin: 1rem 0 2rem 0;
+    padding: 0 1rem;
 }
 
 .title-container {
@@ -23,15 +38,27 @@ h1 {
 /* Character Select Area */
 .char-select-area {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-gap: 2rem;
+    grid-template-columns: repeat( auto-fill, minmax(200px,1fr) );
+    grid-gap: 1.5rem;
 }
 
-.char {
+.char-box {
+    margin: 0 auto;
+    text-align: center;
     background: green;
+    height: 12.5rem;
+    width: 12.5rem;
 }
 
-.char img {
+.char-box img {
     max-width:100%;
     max-height:100%;
+}
+
+.stage-container {
+    height: 275px;
+}
+
+.msg-container {
+    height: 125px;
 }
