@@ -4,81 +4,80 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
-    <!-- Reset -->
+    <title>Dog Fighter</title>
+    <!-- CSS RESET -->
     <link rel="stylesheet" href="assets/css/reset.css">
-
-    <!-- Style -->
+    <!-- CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
-
-    <!-- JQuery -->
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
-    <!-- JavaScript-->
-    <script src="assets/javascript/game.js"></script>
-    
-    <title>Document</title>
+    <!-- jQuery -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- Game -->
+    <script type="text/javascript" src="assets/javascript/game.js"></script>
 </head>
+
 <body>
-
     <div class="wrapper">
-        <!-- Title -->
-        <div class="title-container item">
-            <h1>Dog RPG</h1>
+
+        <div class="big-container">
+            <!-- Title -->
+            <div class="main-area-title"><h1>Dog Fighter</h1></div>
         </div>
-
-        <!-- Character Selection Container -->
-        <div class="char-select-container item">
-
-            <div class="char-select-title">
-                <h2>Choose your fighter!</h2>
-            </div>
-
-            <div class="char-select-area">
-                <div class="char-box">
-                    <span id="char" ><img id="pom" src="assets/images/pom-1.png" alt="Pomeranian"></span>
-                    <h4>Puffed Pomeranian</h4>
+        
+        <div class="big-container">
+            <div id="main-game-section">
+                <!-- Area for character selection -->
+                <div class="chararcter-selection-container">
+                    <div class="area-title">
+                        <h3>Choose Your Fighter!</h3>
+                    </div>
+                    <div id="character-selection"></div>
                 </div>
-
-                <div class="char-box">
-                    <span id="char" ><img id="lab" src="assets/images/lab-1.png" alt="Labrador"></span>
-                    <h4>Lucky Labrador</h4>
-                </div>
-
-                <div class="char-box">
-                    <span id="char" ><img id="boxer" src="assets/images/boxer-1.png" alt="Boxer"></span>
-                    <h4>Busy Boxer</h4>
-                </div>
-
-                <div class="char-box">
-                    <span id="char" ><img id="shiba" src="assets/images/shiba-1.png" alt="Shiba Inu"></span>
-                    <h4>Sneaky Shiba</h4>
-                </div>
-            </div>
-        </div>
-
-        <!-- Fight Area -->
-        <div class="stage-container item">
-            <div class="player-container">
-                <div id="player" ></div>
-                <button onclick="" id="attack" >Attack</button>
-            </div>
-
-            <div class="opponent-container">
-                <div id="opponent" ></div>
-            </div>
-        </div>
-
-        <!-- Message Area -->
-        <div class="msg-container item">
-            <div class="message-area">
-
-            </div>
-            
-            <button onclick="" id="restart" >Restart</button>
-        </div>
-    </div>
     
+                <!-- Area for Opponent selection -->
+                <div class="opponent-selection-container">
+                    <div class="area-title">Choose Your Opponent!</div>
+                    <div id="available-opponent-section"></div>
+                </div>
+                
+    
+                <!-- Fighter Area -->
+                <div class="stage-container">
+                    <div class="area-title">Arena</div>
+
+                    <!-- Area for selected character -->
+                    <div id="selected-character-area">
+                        <div class="area-title">
+                            <h3>Your Fighter</h3>
+                        </div>
+                        <div id="selected-character"></div>
+                    </div>
+
+                    <!-- Attack button -->
+                    <div id="arena-area">
+                        <button id="attack-button">Attack</button>
+                    </div>
+                    
+                    <!-- Opponent -->
+                    <div id="action">
+                        <div class="character-area">
+                            <div class="area-title">
+                                <h3>Your opponent</h3>
+                            </div>
+                            <!-- Where opponent appears -->
+                            <div id="opponent"></div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <!-- Area for game text -->
+        <div class="big-container">
+            <div id="game-message"></div>
+        </div>
+        
+    </div>
 </body>
 </html>
