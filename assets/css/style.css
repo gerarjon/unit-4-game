@@ -43,13 +43,13 @@ h4 {
 
 .wrapper {
     margin: 0 auto;
-    width: 80%;
+    width: 70%;
 }
 
 .area-title {
     margin: 0 auto;
     margin-bottom: 1rem;
-    width: 50%;
+    width: 70%;
 }
 
 /* CSS that controls how the characters look in the character selection area */
@@ -101,3 +101,10 @@ h4 {
     background-position: center;
     background-repeat: no-repeat;
 }
+
+/* Game Message */
+#game-message {
+    margin: 0 auto;
+    width: 70%;
+};
+

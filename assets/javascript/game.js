@@ -1,9 +1,7 @@
 $(document).ready(function(){
-
   // Function that hides the arena and opponent selection area
   $(".stage-container").hide();
   $(".opponent-selection-container").hide();
-    
     // Characters //
     //-----------------------------------------------
     var characters = {
@@ -44,7 +42,7 @@ $(document).ready(function(){
     var fighter;
     // Opponents to select
     var opponent = [];
-    // Chosen opponent 
+    // The Selected opponent
     var chosenOpponent;
     // Tracks numbner of turns
     var turnCounter = 1;
@@ -96,14 +94,14 @@ $(document).ready(function(){
 
       // Function that restarts the game
       restart: function(message) {
-        var restart = $("<button>Restart</button>").click(function() {
+        var restartGame = $("<button>Restart</button>").click(function() {
           location.reload();
         });
-        var endMessage = $("<div>").text(messsage);
+        var endMessage = $("<div>").text(message);
 
         // Adds the created functions above to the end of the page
-        $("body").append(endMessage);
-        $("body").append(restart);
+        $("#game-message").append(endMessage);
+        $("#game-message").append(restartGame);
       },
 
       // Function that clears in game messages
@@ -134,7 +132,7 @@ $(document).ready(function(){
         $(".opponent-selection-container").show();
         game.updateCharacter(fighter, "#selected-character");
         // Applies original brightness to character
-        $(".character-image").css({"filter": "brightness(100%)", "height": "50%", "width": "50%"})
+        $(".character-image").css({"filter": "brightness(100%)", "height": "50%", "width": "50%"});
         game.displayOpp(opponent);
       }
     });
@@ -154,7 +152,54 @@ $(document).ready(function(){
         $(".stage-container").show();
       }
     });
-    
 
-
+    // Function for when "attack" button is clicked
+    $("#attack-button").on("click", function() {
+      if ( $("#opponent").children().length !== 0 ) {
+        var attackMessage = `${fighter.name} attacked ${opponent.name} for ${fighter.attack * turnCounter} damage!`;
+        var counterAttackMessage = `${opponent.name} attacked back for ${opponent.enemyAttack} damage...`
+        game.clearMessage();
+        // Reduce opponent's health by fighter's attack value
+        opponent.health -= fighter.attack * turnCounter;
+        if (opponent.health > 0) {
+          game.updateCharacter(opponent, "#opponent");
+          $(".character-image").css({"filter": "brightness(100%)", "height": "50%", "width": "50%"});
+          game.displayMessage(attackMessage);
+          game.displayMessage(counterAttackMessage);
+          // Reduce health by opponent's counter attack value
+          fighter.health -= opponent.enemyAttack;
+          game.updateCharacter(fighter, "#selected-character");
+          $(".character-image").css({"filter": "brightness(100%)", "height": "50%", "width": "50%"});
+          // If the player loses
+          // call restart() 
+          if (fighter.health <= 0) {
+            game.clearMessage();
+            game.restart("You lose. Game Over....");
+            $("#attack-button").off("click");
+          }
+        } else {
+          // If the enemy loses
+          // remove the enemy from the arena
+          $("#opponent").empty();
+          var gameMessage = `You have slain ${opponent.name}. Choose a new opponent!`;
+          game.displayMessage(gameMessage);
+          opponentsDefeated++;
+          $(".opponent-selection-container").show();
+          // If all the opponents are defeated
+          // call restart() to start the game again
+          if (opponentsDefeated >= 3) {
+            $(".opponent-selection-container").hide();
+            game.clearMessage();
+            $("#attack-button").css("visibility", "hidden");
+            game.restart("You win!");
+          }
+        } 
+        // Increase turnCounter by 1
+        turnCounter++;
+      } else {
+        // If there is no enemy, display a message 
+        game.clearMessage();
+        game.displayMessage("Please pick an opponent");
+      }
+    });
   });
