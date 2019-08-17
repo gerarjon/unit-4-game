@@ -132,7 +132,7 @@ $(document).ready(function(){
         $(".opponent-selection-container").show();
         game.updateCharacter(fighter, "#selected-character");
         // Applies original brightness to character
-        $(".character-image").css({"filter": "brightness(100%)", "height": "50%", "width": "50%"});
+        $(".character-image").css({"filter": "brightness(100%)", "width": "50%"});
         game.displayOpp(opponent);
       }
     });
@@ -147,59 +147,63 @@ $(document).ready(function(){
         game.updateCharacter(opponent, "#opponent");
         $(this).remove();
         game.clearMessage();
-        $(".character-image").css({"filter": "brightness(100%)", "height": "50%", "width": "50%"})
+        $(".character-image").css({"filter": "brightness(100%)", "width": "50%"})
         $(".opponent-selection-container").hide();
         $(".stage-container").show();
       }
     });
 
+
     // Function for when "attack" button is clicked
     $("#attack-button").on("click", function() {
-      if ( $("#opponent").children().length !== 0 ) {
-        var attackMessage = `${fighter.name} attacked ${opponent.name} for ${fighter.attack * turnCounter} damage!`;
-        var counterAttackMessage = `${opponent.name} attacked back for ${opponent.enemyAttack} damage...`
-        game.clearMessage();
-        // Reduce opponent's health by fighter's attack value
-        opponent.health -= fighter.attack * turnCounter;
-        if (opponent.health > 0) {
-          game.updateCharacter(opponent, "#opponent");
-          $(".character-image").css({"filter": "brightness(100%)", "height": "50%", "width": "50%"});
-          game.displayMessage(attackMessage);
-          game.displayMessage(counterAttackMessage);
-          // Reduce health by opponent's counter attack value
-          fighter.health -= opponent.enemyAttack;
-          game.updateCharacter(fighter, "#selected-character");
-          $(".character-image").css({"filter": "brightness(100%)", "height": "50%", "width": "50%"});
-          // If the player loses
-          // call restart() 
-          if (fighter.health <= 0) {
-            game.clearMessage();
-            game.restart("You lose. Game Over....");
-            $("#attack-button").off("click");
-          }
+      
+        if ( $("#opponent").children().length !== 0 ) {
+          var attackMessage = `${fighter.name} attacked ${opponent.name} for ${fighter.attack * turnCounter} damage!`;
+          var counterAttackMessage = `${opponent.name} attacked back for ${opponent.enemyAttack} damage...`
+          game.clearMessage();
+          // Reduce opponent's health by fighter's attack value
+          opponent.health -= fighter.attack * turnCounter;
+          if (opponent.health > 0) {
+            game.updateCharacter(opponent, "#opponent");
+            $(".character-image").css({"filter": "brightness(100%)", "width": "50%"});
+            game.displayMessage(attackMessage);
+            game.displayMessage(counterAttackMessage);
+            // Reduce health by opponent's counter attack value
+            fighter.health -= opponent.enemyAttack;
+            game.updateCharacter(fighter, "#selected-character");
+            $(".character-image").css({"filter": "brightness(100%)", "width": "50%"});
+            // If the player loses
+            // call restart() 
+            if (fighter.health <= 0) {
+              game.clearMessage();
+              game.restart("You lose. Game Over....");
+              $("#attack-button").off("click");
+            }
+          } else {
+            // If the enemy loses
+            // remove the enemy from the arena
+            $("#opponent").empty();
+            var gameMessage = `You have slain ${opponent.name}. Choose a new opponent!`;
+            game.displayMessage(gameMessage);
+            opponentsDefeated++;
+            $(".opponent-selection-container").show();
+            $(".character-image").css({"filter": "brightness(100%)", "width": "50%"});
+            // If all the opponents are defeated
+            // call restart() to start the game again
+            if (opponentsDefeated >= 3) {
+              $(".opponent-selection-container").hide();
+              game.clearMessage();
+              $("#attack-button").css("visibility", "hidden");
+              game.restart("You win!");
+            }
+          } 
+          // Increase turnCounter by 1
+          turnCounter++;
         } else {
-          // If the enemy loses
-          // remove the enemy from the arena
-          $("#opponent").empty();
-          var gameMessage = `You have slain ${opponent.name}. Choose a new opponent!`;
-          game.displayMessage(gameMessage);
-          opponentsDefeated++;
-          $(".opponent-selection-container").show();
-          // If all the opponents are defeated
-          // call restart() to start the game again
-          if (opponentsDefeated >= 3) {
-            $(".opponent-selection-container").hide();
-            game.clearMessage();
-            $("#attack-button").css("visibility", "hidden");
-            game.restart("You win!");
-          }
-        } 
-        // Increase turnCounter by 1
-        turnCounter++;
-      } else {
-        // If there is no enemy, display a message 
-        game.clearMessage();
-        game.displayMessage("Please pick an opponent");
-      }
+          // If there is no enemy, display a message 
+          game.clearMessage();
+          game.displayMessage("Please pick an opponent");
+        }
+
     });
   });
